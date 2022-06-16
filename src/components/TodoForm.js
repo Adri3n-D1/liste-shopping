@@ -18,16 +18,21 @@ function TodoForm(props) {
 
     props.onSubmit({
       id: Math.floor(Math.random() * 10000),
-      text: input
+      text: input,
+      quantity: inputValue
     });
     setInput('');
   };
+
+  const[inputValue, setInputValue] = useState("");
 
 
   return (
     <form onSubmit={handleSubmit} className='todo-form'>
       {props.edit ? (
         <>
+          {/* quantite quantity */}
+          <input type="number" className="todo-input-quantity edit" min="1" max="10" value={inputValue} onChange={(event) => setInputValue(event.target.value)} />
           <input
             placeholder='Mettez à jour votre produit'
             value={input}
@@ -42,6 +47,10 @@ function TodoForm(props) {
         </>
       ) : (
         <>
+          {/* quantite quantity */}
+          <input type="number" className="todo-input-quantity edit" min="1" max="10" value={inputValue} onChange={(event) => setInputValue(event.target.value)} />
+
+          {/* ajouter objet */}
           <input
             placeholder='Ajouter au panier'
             value={input}

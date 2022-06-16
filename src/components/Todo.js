@@ -6,16 +6,22 @@ import { TiTrash } from 'react-icons/ti';
 
 
 const Todo = ({ todos, completeTodo, removeTodo, updateTodo }) => {
+  const[inputValue, setInputValue] = useState("");
+
   const [edit, setEdit] = useState({
     id: null,
-    value: ''
+    value: '',
+    quantity: inputValue
+
   });
 
   const submitUpdate = value => {
     updateTodo(edit.id, value);
     setEdit({
       id: null,
-      value: ''
+      value: '',
+      quantity: inputValue
+
     });
   };
 
@@ -29,7 +35,7 @@ const Todo = ({ todos, completeTodo, removeTodo, updateTodo }) => {
       key={index}
     >
       <div key={todo.id} onClick={() => completeTodo(todo.id)}>
-        {todo.text}
+        {todo.text} - {todo.quantity}
       </div>
       <div className='icons'>
         <TiTrash
@@ -37,7 +43,7 @@ const Todo = ({ todos, completeTodo, removeTodo, updateTodo }) => {
           className='delete-icon'
         />
         <TiEdit
-          onClick={() => setEdit({ id: todo.id, value: todo.text })}
+          onClick={() => setEdit({ id: todo.id, value: todo.text, quantity: todo.quantity })}
           className='edit-icon'
         />
       </div>
